@@ -36,3 +36,21 @@ const JUMP_SONG = {
     ],
     totalTime: 8
 };
+
+const ASCENDING_DESCENDING = {
+    notes: [
+        {pitch: 60, startTime: 0.0, endTime: 0.4},
+        {pitch: 62, startTime: 0.4, endTime: 0.8},
+        {pitch: 64, startTime: 0.8, endTime: 1.2},
+        {pitch: 66, startTime: 1.2, endTime: 2.0},
+        {pitch: 58, startTime: 3.0, endTime: 3.4},
+        {pitch: 60, startTime: 3.4, endTime: 3.8},
+        {pitch: 62, startTime: 3.8, endTime: 4.2},
+        {pitch: 64, startTime: 4.2, endTime: 5.0},
+        {pitch: 58, startTime: 6.0, endTime: 6.4},
+        {pitch: 56, startTime: 6.4, endTime: 6.8},
+        {pitch: 52, startTime: 6.8, endTime: 7.2},
+        {pitch: 50, startTime: 7.2, endTime: 8.0},
+    ],
+    totalTime: 8
+};
