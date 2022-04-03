@@ -54,3 +54,25 @@ const ASCENDING_DESCENDING = {
     ],
     totalTime: 8
 };
+
+function Combine(){
+    let music_vae = new mm.MusicVAE('https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/mel_4bar_small_q2');
+    music_vae.initialize();
+
+    const numInterpolations=12;
+    const star = mm.sequences.quantizeNoteSequence(TWINKLE_TWINKLE, 4);
+    const jump = mm.sequences.quantizeNoteSequence(JUMP_SONG, 4);
+    const ascending = mm.sequences.quantizeNoteSequence(ASCENDING_DESCENDING, 4);
+    const vaePlayer = new mm.Player();
+    music_vae
+        .interpolate([star, jump], 4)
+        .then((sample) => {
+            const concatenated = mm.sequences.concatenate(sample);
+            vaePlayer.start(concatenated);
+        });
+
+    //const interpolatedMelodies = music_vae.interpolate([star,jump],numInterpolations);
+    //return star;
+}
+
+export {Combine}
