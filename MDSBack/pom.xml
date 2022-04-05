@@ -14,7 +14,9 @@
     <name>MDSBack</name>
     <description>MDSBack</description>
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
+        <maven.compiler.source>1.17</maven.compiler.source>
+        <maven.compiler.target>1.17</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
