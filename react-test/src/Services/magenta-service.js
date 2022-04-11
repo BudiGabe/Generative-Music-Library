@@ -33,9 +33,8 @@ const JUMP_SONG = {
         { pitch: 57, startTime: 5.75, endTime: 6.25 },
         { pitch: 55, startTime: 6.25, endTime: 6.75 },
         { pitch: 55, startTime: 6.75, endTime: 8.0 },
-        { pitch: 55, startTime: 8.0, endTime: 8.5 },
     ],
-    totalTime: 9
+    totalTime: 8
 };
 
 const ASCENDING_DESCENDING = {
@@ -63,8 +62,8 @@ music_vae.initialize();
 function combine_sample(){
 
     const numInterpolations=12;
-    //const track1 = mm.sequences.quantizeNoteSequence(sample1, 4)
-    //const track2 = mm.sequences.quantizeNoteSequence(sample2, 4)
+    //const track1 = mm.sequences.quantizeNoteSequence(sample1, 4);
+    //const track2 = mm.sequences.quantizeNoteSequence(sample2, 4);
     const star = mm.sequences.quantizeNoteSequence(TWINKLE_TWINKLE, 4);
     const jump = mm.sequences.quantizeNoteSequence(JUMP_SONG, 4);
     const ascending = mm.sequences.quantizeNoteSequence(ASCENDING_DESCENDING, 4);
@@ -78,14 +77,32 @@ function combine_sample(){
 }
 
 function play_sample(sample){
-
     if(Player.isPlaying()){
         Player.stop()
     }
     else
     {
-        Player.start(sample)
+        Player.start(sample);
     }
 }
 
-export {combine_sample,play_sample}
+function download_sample(sample){
+
+    const sample1=mm.sequences.quantizeNoteSequence(sample,4);
+    sample1.notes.forEach(n => n.velocity=80)
+    const midi = mm.sequenceProtoToMidi(sample1);
+    const file = new Blob([midi], {type: 'audio/midi'});
+
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = 'interp.mid';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+}
+
+export {combine_sample,play_sample,download_sample}
