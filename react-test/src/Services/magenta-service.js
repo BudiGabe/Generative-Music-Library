@@ -33,8 +33,9 @@ const JUMP_SONG = {
         { pitch: 57, startTime: 5.75, endTime: 6.25 },
         { pitch: 55, startTime: 6.25, endTime: 6.75 },
         { pitch: 55, startTime: 6.75, endTime: 8.0 },
+        { pitch: 55, startTime: 8.0, endTime: 8.5 },
     ],
-    totalTime: 8
+    totalTime: 9
 };
 
 const ASCENDING_DESCENDING = {
@@ -56,14 +57,17 @@ const ASCENDING_DESCENDING = {
 };
 
 let music_vae = new mm.MusicVAE('https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/mel_4bar_small_q2');
+let Player = new mm.Player();
 music_vae.initialize();
 
-function Combine(){
+function combine_sample(){
+
     const numInterpolations=12;
+    //const track1 = mm.sequences.quantizeNoteSequence(sample1, 4)
+    //const track2 = mm.sequences.quantizeNoteSequence(sample2, 4)
     const star = mm.sequences.quantizeNoteSequence(TWINKLE_TWINKLE, 4);
     const jump = mm.sequences.quantizeNoteSequence(JUMP_SONG, 4);
     const ascending = mm.sequences.quantizeNoteSequence(ASCENDING_DESCENDING, 4);
-    let vaePlayer = new mm.Player();
 
     let interpolatedMelodies =
         music_vae.interpolate([star,jump],numInterpolations)
@@ -73,4 +77,15 @@ function Combine(){
     return interpolatedMelodies;
 }
 
-export {Combine}
+function play_sample(sample){
+
+    if(Player.isPlaying()){
+        Player.stop()
+    }
+    else
+    {
+        Player.start(sample)
+    }
+}
+
+export {combine_sample,play_sample}
