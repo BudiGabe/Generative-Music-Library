@@ -1,38 +1,117 @@
-.App {
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  min-height: 100vh;
+  background: linear-gradient(50deg, rgb(45, 62, 82), rgb(116, 145, 153));
+  font-family: arial;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header{
+  width: 100vw;
+  height: 7vh;
+  background-color: rgba(0,0,0,0.5);
+  color:rgb(255,255,255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1{
+  font-size: 20px;
+  margin-left: 4rem;
+}
+
+header h2{
+  margin-right: 3rem;
+  font-size: 16px;
+}
+
+header a{
+  color:white;
+  text-decoration: none;
+}
+
+.headerelements{
+  margin-right: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h2{
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+
+form input{
+  width: 192px;
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+}
+
+form button{
+  width: 192px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.5);
+  color:rgb(255,255,255);
+  margin: auto;
+  height: 400px;
+  width: 450px;
+  border-radius: 5px;
+  margin-top: 200px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.25), 
+              0 2px 2px rgba(0,0,0,0.20), 
+              0 4px 4px rgba(0,0,0,0.15), 
+              0 8px 8px rgba(0,0,0,0.10),
+              0 16px 16px rgba(0,0,0,0.05);
+}
+
+input::placeholder{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.checkboxbtn{
+  width: 14px;
+  height: 14px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.termsandcontions{
+  margin:15px 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.termsandcontions h3{
+  font-size: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.registerbtn h3{
+  font-size: 15px;
 }

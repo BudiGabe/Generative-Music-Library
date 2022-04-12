@@ -1,9 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import * as mm from '@magenta/music'
+import React from 'react';
+import Header from './components/Header';
+import { Route, Routes} from 'react-router-dom';
+import Login from './components/Login';
+import Homepage from './components/Homepage';
+import TopSamples from './components/TopSamples';
+import Register from './components/Register';
+import Pagenotfound from './components/Pagenotfound';
 
 function App() {
-  const myRef = React.createRef().current.value = 'canvas'
+  /*const myRef = React.createRef().current.value = 'canvas'
   const JUMP_SONG = {
     notes: [
       { pitch: 62, startTime: 0.5, endTime: 0.75 },
@@ -21,7 +28,7 @@ function App() {
     totalTime: 8
   };
   const player = new mm.Player()
-  const viz = new mm.Visualizer(JUMP_SONG, myRef))
+  const viz = new mm.Visualizer(JUMP_SONG, myRef)
 
   function play() {
     if (player.isPlaying()) {
@@ -31,23 +38,18 @@ function App() {
       player.start(JUMP_SONG)
     }
   }
-
+*/
     return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <button onClick={play}>Play</button>
-            <canvas id="canvas"/>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Homepage/>} />
+          <Route path="/topsamples" element={<TopSamples/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="*" element={<Pagenotfound/>} />
+        </Routes>
+      </div>
     );
 }
 
