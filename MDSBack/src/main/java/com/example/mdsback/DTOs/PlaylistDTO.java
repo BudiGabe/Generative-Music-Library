@@ -1,7 +1,6 @@
 package com.example.mdsback.DTOs;
 
 import com.example.mdsback.models.Playlist;
-import com.example.mdsback.models.Sample;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -17,16 +16,20 @@ public class PlaylistDTO {
 
     public PlaylistDTO(Playlist playlist) {
         this.name = playlist.getName();
-        for (Sample sample : playlist.getSamples()) {
-           SampleDTO sampleDTO = new SampleDTO();
-           sampleDTO.setName(sample.getName());
-           sampleDTO.setTotalTime(sample.getTotalTime());
-           sampleDTO.setNotes(sample.getNotes()
-                   .stream()
-                   .map(NoteDTO::new)
-                   .collect(Collectors.toList()));
-
-           samples.add(sampleDTO);
-        }
+        this.samples = playlist.getSamples()
+                .stream()
+                .map(SampleDTO::new)
+                .collect(Collectors.toList());
+//        for (Sample sample : playlist.getSamples()) {
+//           SampleDTO sampleDTO = new SampleDTO(sample);
+////           sampleDTO.setName(sample.getName());
+////           sampleDTO.setTotalTime(sample.getTotalTime());
+////           sampleDTO.setNotes(sample.getNotes()
+////                   .stream()
+////                   .map(NoteDTO::new)
+////                   .collect(Collectors.toList()));
+//
+//           samples.add(sampleDTO);
+//        }
     }
 }
