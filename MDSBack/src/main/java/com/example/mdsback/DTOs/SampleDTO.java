@@ -26,13 +26,5 @@ public class SampleDTO {
                 .stream()
                 .map(NoteDTO::new)
                 .collect(Collectors.toList());
-//        for (Note note : sample.getNotes()) {
-//            NoteDTO noteDTO = new NoteDTO(note);
-//            noteDTO.setStartTime(note.getStartTime());
-//            noteDTO.setEndTime(note.getEndTime());
-//            noteDTO.setPitch(note.getPitch());
-
-//            notes.add(noteDTO);
-//        }
     }
 }

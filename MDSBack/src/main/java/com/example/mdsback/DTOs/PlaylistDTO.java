@@ -20,16 +20,5 @@ public class PlaylistDTO {
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
-//        for (Sample sample : playlist.getSamples()) {
-//           SampleDTO sampleDTO = new SampleDTO(sample);
-////           sampleDTO.setName(sample.getName());
-////           sampleDTO.setTotalTime(sample.getTotalTime());
-////           sampleDTO.setNotes(sample.getNotes()
-////                   .stream()
-////                   .map(NoteDTO::new)
-////                   .collect(Collectors.toList()));
-//
-//           samples.add(sampleDTO);
-//        }
     }
 }

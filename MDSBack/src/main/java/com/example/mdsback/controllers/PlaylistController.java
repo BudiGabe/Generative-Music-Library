@@ -1,12 +1,10 @@
 package com.example.mdsback.controllers;
 
 import com.example.mdsback.DTOs.PlaylistDTO;
-import com.example.mdsback.DTOs.SampleDTO;
 import com.example.mdsback.models.Playlist;
 import com.example.mdsback.models.Sample;
 import com.example.mdsback.repositories.PlaylistRepository;
 import com.example.mdsback.repositories.SampleRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +20,6 @@ public class PlaylistController {
     private PlaylistRepository playlistRepository;
     @Autowired
     private SampleRepository sampleRepository;
-
-    private ModelMapper modelMapper;
 
     @GetMapping("/{id}")
     public Playlist findById(@PathVariable Long id) {
@@ -43,18 +39,6 @@ public class PlaylistController {
     @ResponseStatus(HttpStatus.CREATED)
     public Playlist create(@RequestBody Playlist playlist) {
         return playlistRepository.save(playlist);
-    }
-
-    @ResponseStatus(HttpStatus.OK)
-    @PutMapping
-    public Playlist addSample(@RequestBody SampleDTO sampleDTO, Long playlistId) {
-        Playlist playlistToChange = playlistRepository.findById(playlistId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Playlist not found"));
-
-        Sample sample = modelMapper.map(sampleDTO, Sample.class);
-        playlistToChange.getSamples().add(sample);
-
-        return playlistRepository.save(playlistToChange);
     }
 
     @ResponseStatus(HttpStatus.OK)
