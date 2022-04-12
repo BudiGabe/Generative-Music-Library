@@ -27,7 +27,5 @@ public class MdsBackApplication {
                 "george@hotmail.com",
                 "075567289077",
                 "password123", LocalDate.of(2001, Month.APRIL,25)));
-
     }
-
 }
