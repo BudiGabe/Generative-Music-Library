@@ -7,8 +7,8 @@ import java.util.Collection;
 
 @Data
 @Entity
-@Table(name = "Playlist")
-public class Playlist {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,11 +16,11 @@ public class Playlist {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Column(name = "samples")
     private Collection<Sample> samples;
 
-    @ManyToOne
-    @Column(name = "user")
-    private User user;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Column(name = "playlists")
+    private Collection<Playlist> playlists;
 }

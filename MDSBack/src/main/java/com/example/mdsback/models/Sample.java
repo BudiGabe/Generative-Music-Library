@@ -29,4 +29,8 @@ public class Sample {
     @ManyToMany(mappedBy = "samples")
     @Column(name = "playlists")
     private Collection<Playlist> playlists;
+
+    @ManyToOne
+    @Column(name = "user")
+    private User user;
 }
