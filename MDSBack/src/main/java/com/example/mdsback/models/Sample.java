@@ -25,4 +25,8 @@ public class Sample {
             inverseJoinColumns = @JoinColumn(name = "sample_id", referencedColumnName = "id"))
     @Column(name = "notes")
     private Collection<Note> notes;
+
+    @ManyToMany(mappedBy = "samples")
+    @Column(name = "playlists")
+    private Collection<Playlist> playlists;
 }
