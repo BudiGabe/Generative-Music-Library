@@ -31,6 +31,5 @@ public class Sample {
     private Collection<Playlist> playlists;
 
     @ManyToOne
-    @Column(name = "user")
     private User user;
 }

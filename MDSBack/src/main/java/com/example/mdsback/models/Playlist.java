@@ -21,6 +21,5 @@ public class Playlist {
     private Collection<Sample> samples;
 
     @ManyToOne
-    @Column(name = "user")
     private User user;
 }
