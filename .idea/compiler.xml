@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="MDSBack" target="17" />
+      <module name="MDSBack" target="1.17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
