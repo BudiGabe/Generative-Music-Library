@@ -12,6 +12,7 @@ public class SampleDTO {
     private Long id;
     private String name;
     private float totalTime;
+    private Long likes;
     private Collection<NoteDTO> notes = new ArrayList<>();
 
     public SampleDTO() {
@@ -22,6 +23,7 @@ public class SampleDTO {
         this.id = sample.getId();
         this.name = sample.getName();
         this.totalTime = sample.getTotalTime();
+        this.likes = sample.getLikes();
         this.notes = sample.getNotes()
                 .stream()
                 .map(NoteDTO::new)
