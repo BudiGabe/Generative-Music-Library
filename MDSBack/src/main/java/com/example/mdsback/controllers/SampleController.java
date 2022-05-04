@@ -20,12 +20,14 @@ public class SampleController {
     @Autowired
     private SampleService sampleService;
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public SampleDTO findById(@PathVariable Long id) {
         Sample sample = sampleService.findById(id);
         return new SampleDTO(sample);
     }
 
+    @CrossOrigin
     @GetMapping
     public List<SampleDTO> findAll() {
         return sampleRepo.findAll()
@@ -34,12 +36,14 @@ public class SampleController {
                 .collect(Collectors.toList());
     }
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Sample create(@RequestBody Sample sample) {
         return sampleRepo.save(sample);
     }
 
+    @CrossOrigin
     @PutMapping("/like/{id}")
     public SampleDTO likeSample(@PathVariable Long id) {
         Sample sample = sampleService.findById(id);

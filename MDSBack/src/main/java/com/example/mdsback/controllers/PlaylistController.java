@@ -23,11 +23,13 @@ public class PlaylistController {
     @Autowired
     private PlaylistService playlistService;
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public PlaylistDTO findById(@PathVariable Long id) {
         return new PlaylistDTO(playlistService.findById(id));
     }
 
+    @CrossOrigin
     @GetMapping
     public List<PlaylistDTO> findAll() {
         return playlistRepository.findAll()
@@ -36,12 +38,14 @@ public class PlaylistController {
                 .collect(Collectors.toList());
     }
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Playlist create(@RequestBody Playlist playlist) {
         return playlistRepository.save(playlist);
     }
 
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{playlistId}/{sampleId}")
     public void addSampleById(@PathVariable Long playlistId, @PathVariable Long sampleId) {
