@@ -1,23 +1,33 @@
 package com.example.mdsback.registration;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import com.example.mdsback.entities.AppUserRole;
+import lombok.*;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
     private String firstName;
-    private final String lastName;
-    private final String email;
-    private final String password;
+    private String lastName;
+    private String email;
+    private String password;
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
     public String getFirstName() {

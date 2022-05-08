@@ -16,7 +16,6 @@ import java.util.Collections;
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
 
@@ -25,6 +24,7 @@ public class AppUser implements UserDetails {
             sequenceName =  "student_sequence",
             allocationSize = 1
     )
+    // generator de numere
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -33,6 +33,7 @@ public class AppUser implements UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -40,6 +41,10 @@ public class AppUser implements UserDetails {
     private Boolean locked;
     private Boolean enabled;
 
+    public AppUser()
+    {
+
+    }
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -142,5 +147,19 @@ public class AppUser implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "AppUser{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", appUserRole=" + appUserRole +
+                ", locked=" + locked +
+                ", enabled=" + enabled +
+                '}';
     }
 }

@@ -6,6 +6,7 @@ import com.example.mdsback.entities.AppUserService;
 import com.example.mdsback.registration.token.ConfirmationToken;
 import com.example.mdsback.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,11 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class RegistrationService {
+    @Autowired
     private final AppUserService appUserService;
+    @Autowired
     private final EmailValidator emailValidator;
+    @Autowired
     private final ConfirmationTokenService confirmationTokenService;
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());

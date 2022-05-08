@@ -3,6 +3,7 @@ package com.example.mdsback.entities;
 import com.example.mdsback.registration.token.ConfirmationToken;
 import com.example.mdsback.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,8 +17,11 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AppUserService implements UserDetailsService {
     private final static String USER_NOT_FOUND_MSG = "USER NOT FOUND";
-    private final AppUserRepository appUserRepository =null;
+    @Autowired
+    private final AppUserRepository appUserRepository;
+    @Autowired
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
     private final ConfirmationTokenService confirmationTokenService;
 
 
@@ -31,6 +35,8 @@ public class AppUserService implements UserDetailsService {
     }
     public String signUpUser(AppUser appUser)
     {
+        System.out.println("fds");
+        System.out.println(appUser);
         boolean userExists =  appUserRepository.findByEmail(appUser.getEmail()).isPresent();
         if(userExists)
         {
@@ -46,6 +52,7 @@ public class AppUserService implements UserDetailsService {
                 LocalDateTime.now().plusMinutes(15),
                 appUser
         );
+
         appUserRepository.save(appUser);//salveaza in baza de date
         confirmationTokenService.saveConfirmationToken(
                 confirmationToken
