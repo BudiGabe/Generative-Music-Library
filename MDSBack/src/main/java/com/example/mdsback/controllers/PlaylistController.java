@@ -4,11 +4,11 @@ import com.example.mdsback.DTOs.PlaylistDTO;
 import com.example.mdsback.models.Playlist;
 import com.example.mdsback.models.Sample;
 import com.example.mdsback.repositories.PlaylistRepository;
-import com.example.mdsback.repositories.SampleRepository;
+import com.example.mdsback.services.PlaylistService;
+import com.example.mdsback.services.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,14 +19,17 @@ public class PlaylistController {
     @Autowired
     private PlaylistRepository playlistRepository;
     @Autowired
-    private SampleRepository sampleRepository;
+    private SampleService sampleService;
+    @Autowired
+    private PlaylistService playlistService;
 
+    @CrossOrigin
     @GetMapping("/{id}")
-    public Playlist findById(@PathVariable Long id) {
-        return playlistRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Playlist not found"));
+    public PlaylistDTO findById(@PathVariable Long id) {
+        return new PlaylistDTO(playlistService.findById(id));
     }
 
+    @CrossOrigin
     @GetMapping
     public List<PlaylistDTO> findAll() {
         return playlistRepository.findAll()
@@ -35,20 +38,19 @@ public class PlaylistController {
                 .collect(Collectors.toList());
     }
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Playlist create(@RequestBody Playlist playlist) {
         return playlistRepository.save(playlist);
     }
 
+    @CrossOrigin
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{playlistId}/{sampleId}")
     public void addSampleById(@PathVariable Long playlistId, @PathVariable Long sampleId) {
-        Playlist playlistToChange = playlistRepository.findById(playlistId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Playlist not found"));
-
-        Sample sampleToAdd = sampleRepository.findById(sampleId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sample not found"));
+        Playlist playlistToChange = playlistService.findById(playlistId);
+        Sample sampleToAdd = sampleService.findById(sampleId);
 
         playlistToChange.getSamples().add(sampleToAdd);
         playlistRepository.save(playlistToChange);
