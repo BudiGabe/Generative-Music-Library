@@ -3,6 +3,8 @@ import * as mm from '@magenta/music'
 let music_vae = new mm.MusicVAE('https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/mel_4bar_small_q2');
 let Player = new mm.Player();
 music_vae.initialize();
+let music_rnn = new mm.MusicRNN('https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn');
+music_rnn.initialize();
 
 function combine_sample(sample1, sample2, percentage){
 
@@ -20,6 +22,17 @@ function combine_sample(sample1, sample2, percentage){
                 return samples[percentage];
     });
     return interpolatedMelodies;
+}
+
+function continue_sample(sample,rnn_steps,rnn_temperature){
+    const qns = mm.sequences.quantizeNoteSequence(sample, 4);
+
+    let continueSample =
+        music_rnn.continueSequence(qns,rnn_steps,rnn_temperature)
+            .then((sample) => {
+                return sample;
+                });
+    return continueSample;
 }
 
 function play_sample(sample){
@@ -51,4 +64,4 @@ function download_sample(sample){
         }, 0);
 }
 
-export {combine_sample,play_sample,download_sample}
+export {combine_sample,play_sample,download_sample,continue_sample}
