@@ -19,6 +19,9 @@ public class Sample {
     @Column(name = "totalTime")
     private float totalTime;
 
+    @Column(name = "likes")
+    private Long likes;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "sample_notes",
             joinColumns = @JoinColumn(name = "note_id", referencedColumnName = "id"),
