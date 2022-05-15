@@ -10,4 +10,6 @@ public interface SampleRepository extends JpaRepository<Sample, Long> {
     List<Sample> findAllByOrderByIdDesc();
 
     List<Sample> findAllByOrderByLikesDesc();
+
+    Sample findByName(String name);
 }

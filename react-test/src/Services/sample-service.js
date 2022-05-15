@@ -30,3 +30,13 @@ export const saveSample = (sample) => {
     })
         .then(response => response.json())
 }
+
+export const getSampleById = (id) => {
+    return fetch(apiUrl + 'id/' + id)
+        .then(response => response.json())
+}
+
+export const getSampleByName = (name) => {
+    return fetch(apiUrl + 'name/' + name)
+        .then(response => response.json())
+}
