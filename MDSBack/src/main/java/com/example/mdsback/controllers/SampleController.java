@@ -21,9 +21,16 @@ public class SampleController {
     private SampleService sampleService;
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public SampleDTO findById(@PathVariable Long id) {
         Sample sample = sampleService.findById(id);
+        return new SampleDTO(sample);
+    }
+
+    @CrossOrigin
+    @GetMapping("/name/{name}")
+    public SampleDTO findByName(@PathVariable String name) {
+        Sample sample = sampleRepo.findByName(name);
         return new SampleDTO(sample);
     }
 
@@ -31,6 +38,24 @@ public class SampleController {
     @GetMapping
     public List<SampleDTO> findAll() {
         return sampleRepo.findAll()
+                .stream()
+                .map(SampleDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @CrossOrigin
+    @GetMapping("/new")
+    public List<SampleDTO> findAllNew() {
+        return sampleRepo.findAllByOrderByIdDesc()
+                .stream()
+                .map(SampleDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @CrossOrigin
+    @GetMapping("/top")
+    public List<SampleDTO> findAllTop() {
+        return sampleRepo.findAllByOrderByLikesDesc()
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
