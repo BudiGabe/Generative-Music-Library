@@ -12,3 +12,21 @@ export const likeSample = (sampleId) => {
         .then(response => response.json())
         .then(data => console.log(data))
 }
+
+export const getSamplesNew = () => {
+    return fetch(apiUrl + 'new')
+        .then(response => response.json())
+}
+
+export const getSamplesTop = () => {
+    return fetch(apiUrl + 'top')
+        .then(response => response.json())
+}
+
+export const saveSample = (sample) => {
+    return fetch(apiUrl, {
+        method: 'POST',
+        body: sample
+    })
+        .then(response => response.json())
+}
