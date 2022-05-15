@@ -21,14 +21,20 @@ export const getSamplesNew = () => {
 export const getSamplesTop = () => {
     return fetch(apiUrl + 'top')
         .then(response => response.json())
+        .then(response => console.log(response))
 }
 
 export const saveSample = (sample) => {
     return fetch(apiUrl, {
         method: 'POST',
-        body: sample
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(sample)
     })
         .then(response => response.json())
+        .then(response => console.log(response))
 }
 
 export const getSampleById = (id) => {
