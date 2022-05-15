@@ -37,6 +37,24 @@ public class SampleController {
     }
 
     @CrossOrigin
+    @GetMapping("/new")
+    public List<SampleDTO> findAllNew() {
+        return sampleRepo.findAllByOrderByIdDesc()
+                .stream()
+                .map(SampleDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @CrossOrigin
+    @GetMapping("/top")
+    public List<SampleDTO> findAllTop() {
+        return sampleRepo.findAllByOrderByLikesDesc()
+                .stream()
+                .map(SampleDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Sample create(@RequestBody Sample sample) {
