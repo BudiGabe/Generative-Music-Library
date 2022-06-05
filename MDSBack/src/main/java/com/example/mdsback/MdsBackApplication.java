@@ -11,9 +11,7 @@ public class MdsBackApplication {
         SpringApplication.run(MdsBackApplication.class, args);
     }
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    @Bean public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
