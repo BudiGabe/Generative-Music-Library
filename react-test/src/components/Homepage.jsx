@@ -1,5 +1,6 @@
 import React from 'react'
 import Sample from './Sample'
+
 function Homepage() {
     return (
         <div className='homepage'>
