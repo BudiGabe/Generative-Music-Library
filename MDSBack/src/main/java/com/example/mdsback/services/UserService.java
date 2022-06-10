@@ -1,5 +1,6 @@
 package com.example.mdsback.services;
 
+import com.example.mdsback.DTOs.SampleDTO;
 import com.example.mdsback.DTOs.UserDTO;
 import com.example.mdsback.models.Playlist;
 import com.example.mdsback.models.Sample;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -61,4 +64,13 @@ public class UserService {
         return userRepository.save(userToChange);
     }
 
+    public Collection<Sample> getSamplesOfUser(Long id) {
+        User user = this.findById(id);
+        return user.getSamples();
+    }
+
+    public Collection<Playlist> getPlaylistsOfUser(Long id) {
+        User user = this.findById(id);
+        return user.getPlaylists();
+    }
 }
