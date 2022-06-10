@@ -1,6 +1,8 @@
 package com.example.mdsback.services;
 
 import com.example.mdsback.DTOs.UserDTO;
+import com.example.mdsback.models.Playlist;
+import com.example.mdsback.models.Sample;
 import com.example.mdsback.models.User;
 import com.example.mdsback.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private PlaylistService playlistService;
+
+    @Autowired
+    private SampleService sampleService;
+
+    @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
     public User findById(@PathVariable Long id) {
@@ -37,6 +45,20 @@ public class UserService {
     public User create(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public User addSampleToUser(Long sampleId, Long userId) {
+        User userToChange = this.findById(userId);
+        Sample sampleToAdd = sampleService.findById(sampleId);
+        userToChange.getSamples().add(sampleToAdd);
+        return userRepository.save(userToChange);
+    }
+
+    public User addPlaylistToUser(Long playlistId, Long userId) {
+        User userToChange = this.findById(userId);
+        Playlist playlistToAdd = playlistService.findById(playlistId);
+        userToChange.getPlaylists().add(playlistToAdd);
+        return userRepository.save(userToChange);
     }
 
 }

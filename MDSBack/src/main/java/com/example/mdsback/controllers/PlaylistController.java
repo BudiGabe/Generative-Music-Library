@@ -42,7 +42,7 @@ public class PlaylistController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Playlist create(@RequestBody Playlist playlist) {
-        return playlistRepository.save(playlist);
+        return playlistService.create(playlist);
     }
 
     @CrossOrigin

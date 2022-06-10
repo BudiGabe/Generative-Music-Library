@@ -29,4 +29,16 @@ public class UserController {
     public UserDTO findByName(@PathVariable String name) {
         return new UserDTO(userService.findByName(name));
     }
+
+    @CrossOrigin
+    @PutMapping("/sample/{userId}/{sampleId}")
+    public UserDTO addSampleToUser(@PathVariable Long userId, @PathVariable Long sampleId) {
+        return new UserDTO(userService.addSampleToUser(sampleId, userId));
+    }
+
+    @CrossOrigin
+    @PutMapping("/playlist/{userId}/{playlistId}")
+    public UserDTO addPlaylistToUser(@PathVariable Long userId, @PathVariable Long playlistId) {
+        return new UserDTO(userService.addPlaylistToUser(playlistId, userId));
+    }
 }

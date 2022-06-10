@@ -65,7 +65,7 @@ public class SampleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Sample create(@RequestBody Sample sample) {
-        return sampleRepo.save(sample);
+        return sampleService.create(sample);
     }
 
     @CrossOrigin
