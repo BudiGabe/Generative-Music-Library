@@ -9,12 +9,14 @@ import java.util.stream.Collectors;
 
 @Data
 public class PlaylistDTO {
+    private Long id;
     private String name;
     private Collection<SampleDTO> samples = new ArrayList<>();
 
     public PlaylistDTO() {}
 
     public PlaylistDTO(Playlist playlist) {
+        this.id = playlist.getId();
         this.name = playlist.getName();
         this.samples = playlist.getSamples()
                 .stream()
