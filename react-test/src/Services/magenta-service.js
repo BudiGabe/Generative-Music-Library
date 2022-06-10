@@ -1,5 +1,6 @@
 import * as mm from '@magenta/music'
 
+const STEPS_PER_QUARTER = 24;
 let music_vae = new mm.MusicVAE('https://storage.googleapis.com/magentadata/js/checkpoints/music_vae/mel_4bar_small_q2');
 let Player = new mm.Player();
 music_vae.initialize();
@@ -64,4 +65,52 @@ function download_sample(sample){
         }, 0);
 }
 
-export {combine_sample,play_sample,download_sample,continue_sample}
+function upload_sample(file, doneCallback, failCallback) {
+    let reader = new FileReader();
+    reader.onerror = e => {
+        failCallback('Unable to read MIDI file.');
+    }
+    reader.onload = e => {
+        let seq;
+        try {
+            seq = mm.midiToSequenceProto(reader.result);
+        } catch(e) {
+            failCallback('Unable to parse MIDI file.');
+            return;
+        }
+
+        let quantizedSeq;
+        try {
+            quantizedSeq = mm.sequences.quantizeNoteSequence(seq, STEPS_PER_QUARTER);
+        } catch(e) {
+            failCallback('Unable to quantize MIDI file, possibly due to tempo or time signature changes.');
+            return;
+        }
+
+        const quartersPerBar = 4 *  quantizedSeq.timeSignatures[0].numerator / quantizedSeq.timeSignatures[0].denominator;
+        if (quartersPerBar !== 4) {
+            failCallback('Time signatures other than 4/4 not supported.');
+            return;
+        }
+
+        if (quantizedSeq.totalQuantizedSteps > 4 * STEPS_PER_QUARTER) {
+            failCallback('Imported MIDI file must be a single bar.');
+            return;
+        }
+
+        music_vae.encode([quantizedSeq])
+            .then(z => {
+                z.data().then(zArray => {
+                    z.dispose();
+                    doneCallback(zArray);
+                    //return z; //am adaugat eu asta, nush daca e bine
+                });
+            });
+        //return result;
+    }
+
+    reader.readAsBinaryString(file);
+    return doneCallback;
+}
+
+export {combine_sample,play_sample,download_sample,continue_sample,upload_sample}
