@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getSamplesTop } from "../Services/sample-service";
+import { getSamplesNew } from "../Services/sample-service";
 import Sample from "./Sample";
 
 class TopSamples extends Component {
@@ -11,7 +11,7 @@ class TopSamples extends Component {
     }
 
     componentDidMount = () => {
-        getSamplesTop().then(samples => this.setState({samples: samples}))
+        getSamplesNew().then(samples => this.setState({samples: samples}))
     }
 
     render() {

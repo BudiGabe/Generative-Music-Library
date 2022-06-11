@@ -5,12 +5,11 @@ export const getSamples = () => {
         .then(response => response.json())
 }
 
-export const likeSample = (sampleId) => {
-    fetch(apiUrl + 'like/' + sampleId, {
+export const likeSample = (sample) => {
+    return fetch(apiUrl + 'like/' + sample.id, {
         method: 'PUT'
     })
         .then(response => response.json())
-        .then(data => console.log(data))
 }
 
 export const getSamplesNew = () => {
@@ -21,7 +20,6 @@ export const getSamplesNew = () => {
 export const getSamplesTop = () => {
     return fetch(apiUrl + 'top')
         .then(response => response.json())
-        .then(response => console.log(response))
 }
 
 export const saveSample = (sample) => {
@@ -34,7 +32,6 @@ export const saveSample = (sample) => {
         body: JSON.stringify(sample)
     })
         .then(response => response.json())
-        .then(response => console.log(response))
 }
 
 export const getSampleById = (id) => {
