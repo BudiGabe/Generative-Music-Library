@@ -36,22 +36,28 @@ public class UserService {
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
+    private final LoggingService logger = new LoggingService();
+
     public User findById(@PathVariable Long id) {
+        logger.log("Searching for user with id " + id);
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public User findByName(@PathVariable String name) {
+        logger.log("Searching for user with name " + name);
         return userRepository.findByName(name);
     }
 
     public User create(User user) {
+        logger.log("Creating new user with name " + user.getName());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User addSampleToUser(Long sampleId, String userName) {
         User userToChange = this.findByName(userName);
+        logger.log("Adding sample with id " + sampleId + " to user with name " + userName);
         Sample sampleToAdd = sampleService.findById(sampleId);
         userToChange.getSamples().add(sampleToAdd);
         return userRepository.save(userToChange);
@@ -59,6 +65,7 @@ public class UserService {
 
     public User addPlaylistToUser(Long playlistId, String userName) {
         User userToChange = this.findByName(userName);
+        logger.log("Adding playlist with id " + playlistId + " to user with id " + userId);
         Playlist playlistToAdd = playlistService.findById(playlistId);
         userToChange.getPlaylists().add(playlistToAdd);
         return userRepository.save(userToChange);
@@ -66,11 +73,14 @@ public class UserService {
 
     public Collection<Sample> getSamplesOfUser(String userName) {
         User user = this.findByName(userName);
-        return user.getSamples();
+        logger.log("Getting all samples of user with name " + userName);
+      return user.getSamples();
     }
 
     public Collection<Playlist> getPlaylistsOfUser(String userName) {
         User user = this.findByName(userName);
+        logger.log("Getting all playlists of user with id " + id);
         return user.getPlaylists();
     }
+
 }

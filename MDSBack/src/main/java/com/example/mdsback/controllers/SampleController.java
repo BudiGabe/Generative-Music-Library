@@ -15,9 +15,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/samples")
 public class SampleController {
     @Autowired
-    private SampleRepository sampleRepo;
-
-    @Autowired
     private SampleService sampleService;
 
     @CrossOrigin
@@ -30,14 +27,14 @@ public class SampleController {
     @CrossOrigin
     @GetMapping("/name/{name}")
     public SampleDTO findByName(@PathVariable String name) {
-        Sample sample = sampleRepo.findByName(name);
+        Sample sample = sampleService.findByName(name);
         return new SampleDTO(sample);
     }
 
     @CrossOrigin
     @GetMapping
     public List<SampleDTO> findAll() {
-        return sampleRepo.findAll()
+        return sampleService.findAll()
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
@@ -46,7 +43,7 @@ public class SampleController {
     @CrossOrigin
     @GetMapping("/new")
     public List<SampleDTO> findAllNew() {
-        return sampleRepo.findAllByOrderByIdDesc()
+        return sampleService.findAllNew()
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
@@ -55,7 +52,7 @@ public class SampleController {
     @CrossOrigin
     @GetMapping("/top")
     public List<SampleDTO> findAllTop() {
-        return sampleRepo.findAllByOrderByLikesDesc()
+        return sampleService.findAllTop()
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
@@ -71,8 +68,6 @@ public class SampleController {
     @CrossOrigin
     @PutMapping("/like/{id}")
     public SampleDTO likeSample(@PathVariable Long id) {
-        Sample sample = sampleService.findById(id);
-        sampleService.incrementLikes(sample);
-        return new SampleDTO(sampleRepo.save(sample));
+        return new SampleDTO(sampleService.likeSample(id));
     }
 }
