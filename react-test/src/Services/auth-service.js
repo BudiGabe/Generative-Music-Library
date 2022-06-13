@@ -22,5 +22,4 @@ export const login = (userCreds) => {
         body: JSON.stringify(userCreds)
     })
         .then(response => response.json())
-        .then(response => console.log(response))
 }
