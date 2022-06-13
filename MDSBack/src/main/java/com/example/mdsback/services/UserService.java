@@ -36,21 +36,27 @@ public class UserService {
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
+    private final LoggingService logger = new LoggingService();
+
     public User findById(@PathVariable Long id) {
+        logger.log("Searching for user with id " + id);
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public User findByName(@PathVariable String name) {
+        logger.log("Searching for user with name " + name);
         return userRepository.findByName(name);
     }
 
     public User create(User user) {
+        logger.log("Creating new user with name " + user.getName());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User addSampleToUser(Long sampleId, Long userId) {
+        logger.log("Adding sample with id " + sampleId + " to user with id " + userId);
         User userToChange = this.findById(userId);
         Sample sampleToAdd = sampleService.findById(sampleId);
         userToChange.getSamples().add(sampleToAdd);
@@ -58,6 +64,7 @@ public class UserService {
     }
 
     public User addPlaylistToUser(Long playlistId, Long userId) {
+        logger.log("Adding playlist with id " + playlistId + " to user with id " + userId);
         User userToChange = this.findById(userId);
         Playlist playlistToAdd = playlistService.findById(playlistId);
         userToChange.getPlaylists().add(playlistToAdd);
@@ -65,11 +72,13 @@ public class UserService {
     }
 
     public Collection<Sample> getSamplesOfUser(Long id) {
+        logger.log("Getting all samples of user with id " + id);
         User user = this.findById(id);
         return user.getSamples();
     }
 
     public Collection<Playlist> getPlaylistsOfUser(Long id) {
+        logger.log("Getting all playlists of user with id " + id);
         User user = this.findById(id);
         return user.getPlaylists();
     }

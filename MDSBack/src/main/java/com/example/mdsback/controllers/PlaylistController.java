@@ -32,7 +32,7 @@ public class PlaylistController {
     @CrossOrigin
     @GetMapping
     public List<PlaylistDTO> findAll() {
-        return playlistRepository.findAll()
+        return playlistService.findAll()
                 .stream()
                 .map(PlaylistDTO::new)
                 .collect(Collectors.toList());
@@ -49,10 +49,6 @@ public class PlaylistController {
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{playlistId}/{sampleId}")
     public void addSampleById(@PathVariable Long playlistId, @PathVariable Long sampleId) {
-        Playlist playlistToChange = playlistService.findById(playlistId);
-        Sample sampleToAdd = sampleService.findById(sampleId);
-
-        playlistToChange.getSamples().add(sampleToAdd);
-        playlistRepository.save(playlistToChange);
+        playlistService.addSampleById(playlistId, sampleId);
     }
 }
