@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import * as authService from "../Services/auth-service";
 import { useNavigate } from "react-router-dom"
-import { parseJwt } from "../Services/jwt-service";
 
 function Login() {
     const [username, setUsername] = useState('')
@@ -23,11 +22,10 @@ function Login() {
             password: password,
         }
 
-        authService.login(user).then(jwt => {
-            localStorage.setItem("jwt", JSON.stringify(jwt))
+        authService.login(user).then(response => {
+            localStorage.setItem("jwt", response.jwt)
         })
         navigate("/topsamples")
-        console.log(parseJwt(localStorage.getItem("jwt")))
     }
 
     return (
