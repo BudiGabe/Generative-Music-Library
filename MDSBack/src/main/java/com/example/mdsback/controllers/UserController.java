@@ -4,14 +4,8 @@ package com.example.mdsback.controllers;
 import com.example.mdsback.DTOs.PlaylistDTO;
 import com.example.mdsback.DTOs.SampleDTO;
 import com.example.mdsback.DTOs.UserDTO;
-import com.example.mdsback.models.Playlist;
-import com.example.mdsback.models.Sample;
-import com.example.mdsback.models.User;
-import com.example.mdsback.repositories.UserRepository;
 import com.example.mdsback.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,30 +30,30 @@ public class UserController {
     }
 
     @CrossOrigin
-    @PutMapping("/sample/{userId}/{sampleId}")
-    public UserDTO addSampleToUser(@PathVariable Long userId, @PathVariable Long sampleId) {
-        return new UserDTO(userService.addSampleToUser(sampleId, userId));
+    @PutMapping("/sample/{userName}/{sampleId}")
+    public UserDTO addSampleToUser(@PathVariable String userName, @PathVariable Long sampleId) {
+        return new UserDTO(userService.addSampleToUser(sampleId, userName));
     }
 
     @CrossOrigin
-    @PutMapping("/playlist/{userId}/{playlistId}")
-    public UserDTO addPlaylistToUser(@PathVariable Long userId, @PathVariable Long playlistId) {
-        return new UserDTO(userService.addPlaylistToUser(playlistId, userId));
+    @PutMapping("/playlist/{userName}/{playlistId}")
+    public UserDTO addPlaylistToUser(@PathVariable String userName, @PathVariable Long playlistId) {
+        return new UserDTO(userService.addPlaylistToUser(playlistId, userName));
     }
 
     @CrossOrigin
-    @GetMapping("/samples/{userId}")
-    public List<SampleDTO> getSamplesOfUser(@PathVariable Long userId) {
-        return userService.getSamplesOfUser(userId)
+    @GetMapping("/samples/{userName}")
+    public List<SampleDTO> getSamplesOfUser(@PathVariable String userName) {
+        return userService.getSamplesOfUser(userName)
                 .stream()
                 .map(SampleDTO::new)
                 .collect(Collectors.toList());
     }
 
     @CrossOrigin
-    @GetMapping("/playlists/{userId}")
-    public List<PlaylistDTO> getPlaylistsOfUser(@PathVariable Long userId) {
-        return userService.getPlaylistsOfUser(userId)
+    @GetMapping("/playlists/{userName}")
+    public List<PlaylistDTO> getPlaylistsOfUser(@PathVariable String userName) {
+        return userService.getPlaylistsOfUser(userName)
                 .stream()
                 .map(PlaylistDTO::new)
                 .collect(Collectors.toList());
