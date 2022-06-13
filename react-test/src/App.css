@@ -19,7 +19,7 @@ body{
 header{
   width: 100vw;
   height: 7vh;
-  background-color: rgb(53, 56, 69);
+  background-color: rgb(51, 51, 51);
   color:rgb(255,255,255);
   display: flex;
   justify-content: space-between;
@@ -63,9 +63,9 @@ form{
 form input{
   width: 200px;
   height: 40px;
-  border: 0;
+  border: 1px solid;
   padding: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  margin: 10px;
 }
 
 .container{
@@ -73,8 +73,8 @@ form input{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(88, 100, 113);
-  color:rgb(255,255,255);
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   height: 93vh;
   width: 80vw;
 }
@@ -86,6 +86,7 @@ form input{
   gap: 10px;
 }
 .checkboxbtn{
+  font-size: 10px;
   width: 15px;
   height: 15px;
   margin: 0 5px;;
@@ -106,6 +107,10 @@ form input{
   font-size: 15px;
 }
 
+h3{
+  font-size: 12px;
+}
+
 .homepage, .topsamples, .loginpage, .registerpage, .errorpage{
   display: flex;
   align-items: center;
@@ -114,13 +119,13 @@ form input{
 }
 
 .registerbtn, .loginbtn{
-  border: 0;
+  border: 1px solid;
   width: 200px;
   height: 40px;
   margin-top: 35px;
-  background-color: rgb(139, 206, 134);
+  background-color: rgb(51, 51, 51);
+  color:rgb(255,255,255);
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .test-btn{
@@ -128,6 +133,11 @@ form input{
   width: 300px;
   background-color: brown;
   cursor: pointer;
+}
+
+.producer {
+  margin-top : 10px;
+  display: flex;
 }
 
 .SampleCard{
