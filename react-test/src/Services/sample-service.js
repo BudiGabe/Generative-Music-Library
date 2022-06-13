@@ -1,5 +1,5 @@
 let apiUrl = 'http://localhost:8080/api/samples/'
-let token = localStorage.getItem("jwt").toString()
+let token = localStorage.getItem("jwt")
 
 export const getSamples = () => {
     return fetch(apiUrl, {
@@ -14,8 +14,8 @@ export const likeSample = (sample) => {
     return fetch(apiUrl + 'like/' + sample.id, {
         method: 'PUT',
         headers: {
-            'Authorization': 'Bearer' + token
-        }
+            'Authorization': 'Bearer ' + token
+        },
     })
         .then(response => response.json())
 }

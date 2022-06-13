@@ -24,7 +24,7 @@ function combine_sample(sample1, sample2, percentage){
     return interpolatedMelodies;
 }
 
-function continue_sample(sample,rnn_steps,rnn_temperature){
+function continue_sample(sample, rnn_steps, rnn_temperature){
     const qns = mm.sequences.quantizeNoteSequence(sample, 4);
 
     let continueSample =
