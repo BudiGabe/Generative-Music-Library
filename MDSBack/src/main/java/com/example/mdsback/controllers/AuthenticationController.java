@@ -1,5 +1,6 @@
 package com.example.mdsback.controllers;
 
+import com.example.mdsback.DTOs.JwtDTO;
 import com.example.mdsback.DTOs.UserDTO;
 import com.example.mdsback.models.User;
 import com.example.mdsback.services.UserDetailsServiceImpl;
@@ -33,16 +34,15 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody User user) throws Exception {
-
+    @PostMapping(value = "/login")
+    public JwtDTO createAuthenticationToken(@RequestBody User user) throws Exception {
         authenticate(user.getName(), user.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getName());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(token);
+        return new JwtDTO(token);
     }
 
     @CrossOrigin
