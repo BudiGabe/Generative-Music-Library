@@ -31,7 +31,7 @@ function Login() {
     return (
         <div className='loginpage'>
             <div className="container">
-                <h2>Sign-in</h2>
+                <h2>Log-in</h2>
                 <form>
                     <input value={username} onChange={handleUsername} id={"username"} placeholder='Username'/>
                     <input value={password} onChange={handlePassword} id={"password"} type="password"
