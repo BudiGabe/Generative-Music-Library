@@ -8,6 +8,7 @@ function Header() {
         <div className="headerelements">
             <h2><Link to ="/topsamples">Top Samples</Link></h2>
             <h2><Link to ="/newsamples">Discover</Link></h2>
+            <h2><Link to ="/combine">Combine</Link></h2>
             <h2><Link to ="/login">Log-in</Link></h2>
             <h2><Link to ="/register">Register</Link></h2>
         </div>

@@ -65,7 +65,7 @@ public class UserService {
 
     public User addPlaylistToUser(Long playlistId, String userName) {
         User userToChange = this.findByName(userName);
-        logger.log("Adding playlist with id " + playlistId + " to user with id " + userId);
+        logger.log("Adding playlist with id " + playlistId + " to user with name " + userName);
         Playlist playlistToAdd = playlistService.findById(playlistId);
         userToChange.getPlaylists().add(playlistToAdd);
         return userRepository.save(userToChange);
@@ -79,7 +79,7 @@ public class UserService {
 
     public Collection<Playlist> getPlaylistsOfUser(String userName) {
         User user = this.findByName(userName);
-        logger.log("Getting all playlists of user with id " + id);
+        logger.log("Getting all playlists of user with name " + userName);
         return user.getPlaylists();
     }
 

@@ -8,6 +8,7 @@ import TopSamples from './components/TopSamples';
 import Register from './components/Register';
 import Pagenotfound from './components/Pagenotfound';
 import NewSamples from "./components/NewSamples";
+import Combine from "./components/Combine";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="/topsamples" element={<TopSamples/>}/>
                 <Route path="/newsamples" element={<NewSamples/>}/>
+                <Route path="/combine" element={<Combine/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="*" element={<Pagenotfound/>}/>
