@@ -50,27 +50,27 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User addSampleToUser(Long sampleId, Long userId) {
-        User userToChange = this.findById(userId);
+    public User addSampleToUser(Long sampleId, String userName) {
+        User userToChange = this.findByName(userName);
         Sample sampleToAdd = sampleService.findById(sampleId);
         userToChange.getSamples().add(sampleToAdd);
         return userRepository.save(userToChange);
     }
 
-    public User addPlaylistToUser(Long playlistId, Long userId) {
-        User userToChange = this.findById(userId);
+    public User addPlaylistToUser(Long playlistId, String userName) {
+        User userToChange = this.findByName(userName);
         Playlist playlistToAdd = playlistService.findById(playlistId);
         userToChange.getPlaylists().add(playlistToAdd);
         return userRepository.save(userToChange);
     }
 
-    public Collection<Sample> getSamplesOfUser(Long id) {
-        User user = this.findById(id);
+    public Collection<Sample> getSamplesOfUser(String userName) {
+        User user = this.findByName(userName);
         return user.getSamples();
     }
 
-    public Collection<Playlist> getPlaylistsOfUser(Long id) {
-        User user = this.findById(id);
+    public Collection<Playlist> getPlaylistsOfUser(String userName) {
+        User user = this.findByName(userName);
         return user.getPlaylists();
     }
 }
