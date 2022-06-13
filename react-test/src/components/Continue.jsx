@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import ControlledSelect from './ControlledSelect';
-import { getSampleById, getSamplesNew, saveSample } from "../Services/sample-service";
+import { getSampleById, getSampleByName, getSamplesNew, saveSample } from "../Services/sample-service";
 import { Button } from "@mui/material";
 import { combine_sample, continue_sample } from "../Services/magenta-service";
 import Sample from "./Sample";

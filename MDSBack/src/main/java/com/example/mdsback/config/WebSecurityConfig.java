@@ -1,12 +1,11 @@
 package com.example.mdsback.config;
 
-import com.example.mdsback.filters.JwtAuthenticationFilter;
-import com.example.mdsback.filters.JwtAuthorizationFilter;
 import com.example.mdsback.filters.JwtRequestFilter;
 import com.example.mdsback.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,12 +17,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
-
-import static com.example.mdsback.constants.SecurityConstants.REGISTER_URL;
-import static com.example.mdsback.constants.SecurityConstants.SIGN_UP_URL;
 
 @Configuration
 @EnableWebSecurity
@@ -67,6 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/api/security/register").permitAll()
                 .antMatchers("/api/security/login").permitAll()
                 // Our private endpoints
