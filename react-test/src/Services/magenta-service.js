@@ -19,7 +19,7 @@ function combine_sample(sample1, sample2, percentage){
         music_vae.interpolate([track1,track2],numInterpolations)
             .then((samples) =>{
        // return samples[numInterpolations/2];
-                return samples[percentage];
+                return mm.sequences.unquantizeSequence(samples[percentage]);
     });
     return interpolatedMelodies;
 }
