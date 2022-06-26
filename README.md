@@ -6,7 +6,7 @@ We designed and developed a Web Application where users can experiment with musi
 
 
 ## Project video presentation
-Find the project video presentation [here](https://we.tl/t-9RLGBhaOxG).
+Find the project video presentation [here](https://drive.google.com/drive/folders/1NpBZcGi3VBO9NXa3erFjYcYXxgnDKG1v?usp=sharing).
 **Note:** you might need to use a Google account in order to access the drive where the video has been uploaded.
 
 # Members 
